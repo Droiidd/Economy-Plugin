@@ -2,8 +2,7 @@
 A basic economy plugin for minecraft 1.19.2
 
 >## Overview:
-> ---
->the economy plugin adds both a interactable bank and wallet for players to collect cash.
+>The economy plugin adds both a interactable bank and wallet for players to collect cash.
 >The wallet stores money temporarily, and you can risk losing it on death. The bank is to deposit money and keep it safe, but is only accessable through bankers.
 >## Features:
 > - Features a command to view wallet and bank balance
