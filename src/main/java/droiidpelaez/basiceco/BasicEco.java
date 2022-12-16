@@ -10,6 +10,8 @@ import droiidpelaez.basiceco.utils.BankUtils;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class BasicEco extends JavaPlugin {
     public static BasicEco getPlugin() {
@@ -17,6 +19,8 @@ public final class BasicEco extends JavaPlugin {
     }
 
     private static BasicEco plugin;
+    private static HashMap<String, Double> map = BankUtils.listAllBanks();
+
 
     @Override
     public void onEnable() {
@@ -29,19 +33,33 @@ public final class BasicEco extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new OnPlayerDeath(), this);
         getServer().getPluginManager().registerEvents(new OnPlayerPickUp(), this);
 
-        BankUtils.load2();
+        //BankUtils.load2();
+        this.saveDefaultConfig();
+        if(this.getConfig().contains("data")){
+            this.restoreFile();
+        }
+    }
 
+    public void saveFile(){
+        for(Map.Entry<String, Double> entry : map.entrySet()){
+            this.getConfig().set("data."+entry.getKey(), entry.getValue());
+        }
+        this.saveConfig();
 
+    }
+    public void restoreFile(){
+        this.getConfig().getConfigurationSection("data").getKeys(false).forEach(key ->{
+            Double account = (Double) this.getConfig().get("data."+key);
+            map.put(key, account);
+        });
 
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        try {
-            BankUtils.saveBank();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if(!map.isEmpty()){
+            this.saveFile();
         }
     }
 }

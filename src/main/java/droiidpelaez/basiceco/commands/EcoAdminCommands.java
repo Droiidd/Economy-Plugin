@@ -52,13 +52,13 @@ public class EcoAdminCommands implements CommandExecutor {
                     return true;
                 }
                 Player target = Bukkit.getServer().getPlayerExact(args[1]);
-                HashMap<UUID, Double> bankList = BankUtils.listAllBanks();
+                HashMap<String, Double> bankList = BankUtils.listAllBanks();
 
                 if(target == null){ p.sendMessage(ChatColor.GRAY+"This player is not online."); return true;  }
 
-                if(bankList.containsKey(target.getUniqueId()) == false){ BankUtils.createBankAccount(target); }
+                if(bankList.containsKey(target.getUniqueId().toString()) == false){ BankUtils.createBankAccount(target); }
                 Double withdrawal = GlobalMethods.checkPlayerStrToD(args[2], target);
-                Double original = bankList.get(target.getUniqueId());
+                Double original = bankList.get(target.getUniqueId().toString());
                 p.sendMessage("Attempting to withdrawal : $"+(withdrawal)+"...");
 
                 if(original - withdrawal < 0){ p.sendMessage(ChatColor.RED+"Attempted to remove too many funds!"); }
