@@ -14,11 +14,11 @@ public class CheckBalanceCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player){
             Player p = (Player) sender;
-            HashMap<UUID,Double> playerBank = BankUtils.listAllBanks();
-            if(playerBank.containsKey(p.getUniqueId()) != true){ BankUtils.createBankAccount(p);}
+            HashMap<String,Double> playerBank = BankUtils.listAllBanks();
+            if(playerBank.containsKey(p.getUniqueId().toString()) != true){ BankUtils.createBankAccount(p);}
             else
 
-            p.sendMessage(p.getDisplayName()+"'s balance  :  $"+ playerBank.get(p.getUniqueId()));
+            p.sendMessage(p.getDisplayName()+"'s balance  :  $"+ playerBank.get(p.getUniqueId().toString()));
         }
         return true;
     }
