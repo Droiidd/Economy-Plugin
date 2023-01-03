@@ -3,13 +3,12 @@ package droiidpelaez.basiceco;
 import droiidpelaez.basiceco.commands.CheckBalanceCommand;
 import droiidpelaez.basiceco.commands.EcoAdminCommands;
 import droiidpelaez.basiceco.commands.GivePlayerGold;
-import droiidpelaez.basiceco.commands.ReloadBanks;
+import droiidpelaez.basiceco.commands.dropMoneyCommand;
 import droiidpelaez.basiceco.listeners.OnPlayerDeath;
 import droiidpelaez.basiceco.listeners.OnPlayerPickUp;
 import droiidpelaez.basiceco.utils.BankUtils;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +28,7 @@ public final class BasicEco extends JavaPlugin {
         getCommand("balance").setExecutor(new CheckBalanceCommand());
         getCommand("eco").setExecutor(new EcoAdminCommands());
         getCommand("giveGold").setExecutor(new GivePlayerGold());
-        getCommand("rebank").setExecutor(new ReloadBanks());
+        getCommand("drop").setExecutor(new dropMoneyCommand());
         getServer().getPluginManager().registerEvents(new OnPlayerDeath(), this);
         getServer().getPluginManager().registerEvents(new OnPlayerPickUp(), this);
 

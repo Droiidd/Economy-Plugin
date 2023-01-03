@@ -9,4 +9,4 @@ commands:
   balance:
     aliases:
       - bal
-
+  drop:
